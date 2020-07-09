@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Banking.BackgroundTasks\Banking.BackgroundTasks.csproj" />
     <ProjectReference Include="..\Banking.Domain\Banking.Domain.csproj" />
     <ProjectReference Include="..\Banking.Infrastructure\Banking.Infrastructure.csproj" />
     <ProjectReference Include="..\Banking.Service\Banking.Service.csproj" />

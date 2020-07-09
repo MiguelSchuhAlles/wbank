@@ -43,11 +43,7 @@ namespace Banking.API
                 options.UseMySql(connection)
             );
 
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ITransferService, TransferService>();
-            services.AddTransient<IOperationService, OperationService>();
-            services.AddTransient<IAccountService, AccountService>();
-            services.AddTransient<IAuthService, AuthService>();
+            services.AddServices();
 
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<Settings>(appSettingsSection);
@@ -72,6 +68,8 @@ namespace Banking.API
                     ValidateAudience = false
                 };
             });
+
+            services.AddHostedServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

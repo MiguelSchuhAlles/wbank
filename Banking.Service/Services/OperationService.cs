@@ -162,7 +162,7 @@ namespace Banking.Service.Services
             return response;
         }
 
-        private async Task<Operation> RegisterOperation(Account account, decimal amount, OperationType operationType)
+        public async Task<Operation> RegisterOperation(Account account, decimal amount, OperationType operationType)
         {
             switch (operationType)
             {
@@ -174,6 +174,7 @@ namespace Banking.Service.Services
                     account.Balance -= amount;
                     break;
                 case OperationType.Deposit:
+                case OperationType.InterestIncome:
                     account.Balance += amount;
                     break;
                 default:

@@ -41,6 +41,7 @@ namespace Banking.Service.Services
                                     where operation.Account.UserId == userId
                                        && operation.AccountId == accountId
                                        && operation.Date >= start
+                                       && operation.OperationType != OperationType.InterestIncome
                                     orderby operation.Date
                                     select operation)
                               .Where(where ?? (_ => true))

@@ -11,6 +11,7 @@ namespace Banking.Domain.Entities.Operations
         Withdrawal = 2,
         Deposit = 3,
         Charge = 4, //credit card
-        Payment = 5
+        Payment = 5,
+        InterestIncome = 6
     }
 }
