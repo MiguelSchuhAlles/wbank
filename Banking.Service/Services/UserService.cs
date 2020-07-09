@@ -16,10 +16,10 @@ namespace Banking.Service.Services
         }
 
         public async ValueTask<IList<User>> FindAll(CancellationToken ct = default)
-            => await this.Context.Users.ToListAsync(ct);
+            => await Context.Users.Include(u => u.Account).ToListAsync(ct);
 
         public async ValueTask<User> FindById(int id, CancellationToken ct = default)
-            => await this.Context.Users.Include(u => u.Account).FirstOrDefaultAsync(u => u.Id == id, ct);
+            => await Context.Users.Include(u => u.Account).FirstOrDefaultAsync(u => u.Id == id, ct);
 
         //TODO: create user
 

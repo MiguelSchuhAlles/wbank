@@ -33,24 +33,12 @@ namespace Banking.Service.Services
 
                 if (account == null)
                 {
+                    response.ResponseStatus = ResponseStatus.Error;
                     response.Message = "Invalid accont number.";
                     return response;
                 }
 
-                //using (var transaction = Context.Database.BeginTransaction())
-                //{
-                //    try
-                //    {
                 response.Item = await RegisterOperation(account, request.Amount, OperationType.Deposit);
-
-                //    transaction.Commit();
-                //}
-                //catch (Exception)
-                //{
-                //    transaction.Rollback();
-                //    throw;
-                //}
-                //}
 
                 response.ResponseStatus = ResponseStatus.Success;
             }
@@ -89,6 +77,7 @@ namespace Banking.Service.Services
 
                 if (account == null)
                 {
+                    response.ResponseStatus = ResponseStatus.Error;
                     response.Message = "Invalid accont number.";
                     return response;
                 }
@@ -146,6 +135,7 @@ namespace Banking.Service.Services
 
                 if (account == null)
                 {
+                    response.ResponseStatus = ResponseStatus.Error;
                     response.Message = "Invalid accont number.";
                     return response;
                 }
@@ -157,19 +147,7 @@ namespace Banking.Service.Services
                     return response;
                 }
 
-                //using (var transaction = Context.Database.BeginTransaction())
-                //{
-                //    try
-                //    {
                 response.Item = await RegisterOperation(account, request.Amount, OperationType.Withdrawal);
-                //        transaction.Commit();
-                //    }
-                //    catch (Exception)
-                //    {
-                //        transaction.Rollback();
-                //        throw;
-                //    }
-                //}
 
                 response.ResponseStatus = ResponseStatus.Success;
             }

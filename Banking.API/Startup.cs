@@ -54,8 +54,6 @@ namespace Banking.API
 
             services.AddSingleton(s => s.GetService<IOptions<Settings>>().Value);
 
-            //services.AddAuth(appSettingsSection.Get<Settings>().Secret);
-
             var key = Encoding.ASCII.GetBytes(appSettingsSection.Get<Settings>().Secret);
             services.AddAuthentication(x =>
             {
