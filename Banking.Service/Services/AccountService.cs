@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Banking.Service.Interfaces;
 using System.Linq.Expressions;
+using Banking.Shared.Responses;
 
 namespace Banking.Service.Services
 {
@@ -51,9 +52,19 @@ namespace Banking.Service.Services
             return operations;
         }
 
-        public async ValueTask<IList<Operation>> GetInterestByMonth(int userId, int accountId, DateTime start)
+        public async ValueTask<IList<TimeSeriesDataPoint<decimal>>> GetInterestByMonth(int userId, int accountId, DateTime start)
         {
-            throw new NotImplementedException();
+            var ops = (await Context.Operations
+                .Where(o => o.OperationType == OperationType.InterestIncome && o.AccountId == accountId && o.Date >= start)
+                .GroupBy(o => new { Date = new DateTime(o.Date.Year, o.Date.Month, 1) })
+                .Select(g => new TimeSeriesDataPoint<decimal>
+                {
+                    Timestamp = g.Key.Date,
+                    Value = g.Sum(o => o.Amount)
+                }).ToListAsync()).OrderBy(o => o.Timestamp);
+
+            return ops.ToList();
+
         }
     }
 }

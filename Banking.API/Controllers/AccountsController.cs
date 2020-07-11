@@ -88,5 +88,21 @@ namespace Banking.Application.Controllers
 
             return Ok(await _accountService.GetOperationHistory(id, userId, start, operation => creditOps.Contains(operation.OperationType)));
         }
+
+        [HttpGet, Route("{id}/interesthistory")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async ValueTask<IActionResult> GetInterestHistory(int id, DateTime start)
+        {
+            var userId = Convert.ToInt32(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
+
+            if(start == null)
+            {
+                var date = DateTime.UtcNow.AddMonths(-4);
+                start = new DateTime(date.Year, date.Month, 1);
+            }
+                
+            return Ok(await _accountService.GetInterestByMonth(userId, id, start));
+        }
     }
 }

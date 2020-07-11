@@ -78,7 +78,7 @@ class Payment extends Component {
           <Input placeholder="Description" inputProps={{ 'aria-label': 'description' }} />
         </div>
         <div className={classes.root}>
-          <Button type="submit" variant="contained">Confirm Withdrawal</Button>
+          <Button type="submit" variant="contained">Confirm Payment</Button>
         </div>
       </form>
    

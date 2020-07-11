@@ -13,6 +13,7 @@ import AccountCard from './AccountCard';
 import Deposit from '../Pages/Deposit';
 import Withdrawal from '../Pages/Withdrawal';
 import Payment from '../Pages/Payment';
+import InterestHistory from '../Pages/InterestHistory';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -95,7 +96,7 @@ export default function FullWidthTabs(props) {
             <OperationHistoryTable token={props.token} accountId={props.accountId}></OperationHistoryTable>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-           Page not implemented.
+          <InterestHistory token={props.token} accountId={props.accountId}></InterestHistory>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
             <Deposit token={props.token} accountId={props.accountId}></Deposit>
