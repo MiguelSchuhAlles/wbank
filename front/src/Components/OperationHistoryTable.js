@@ -19,7 +19,6 @@ const columns = [
 
 const useStyles = theme => ({
   root: {
-    width: '70%',
   },
   container: {
     maxHeight: 440,

@@ -68,7 +68,7 @@ class AccountCard extends Component {
             {this.state.name}
             </Typography>
             <Typography variant="h5" component="h2">
-            Balance: $ {this.state.balance.toFixed(2)}
+            Balance: ${this.state.balance.toFixed(2)}
             </Typography>
             <Typography className={classes.pos} color="textSecondary">
             Account {this.state.account}

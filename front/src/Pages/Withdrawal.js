@@ -12,7 +12,7 @@ const useStyles = theme => ({
   },
 });
 
-class Deposit extends Component {
+class Withdrawal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -37,7 +37,7 @@ class Deposit extends Component {
         amount: this.state.amount
       }
 
-      fetch('https://localhost:44337/api/operations/deposit',{
+      fetch('https://localhost:44337/api/operations/withdraw',{
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ class Deposit extends Component {
       .then(res => res.json())
       .then((data) => {
         if(data.responseStatus === 0)
-          alert(`Deposit created successfully. New balance: $${data.item.balance.toFixed(2)}`);
+          alert(`Withdrawal registered successfully. New balance: $${data.item.balance.toFixed(2)}`);
         else
           alert(`Operation failed: ${data.message}`);
       })
@@ -70,7 +70,7 @@ class Deposit extends Component {
           <Input placeholder="Description" inputProps={{ 'aria-label': 'description' }} />
         </div>
         <div className={classes.root}>
-          <Button type="submit" variant="contained">Confirm Deposit</Button>
+          <Button type="submit" variant="contained">Confirm Withdrawal</Button>
         </div>
       </form>
    
@@ -78,4 +78,4 @@ class Deposit extends Component {
   }
 } 
 
-export default withStyles(useStyles)(Deposit)
+export default withStyles(useStyles)(Withdrawal)

@@ -42,7 +42,7 @@ namespace Banking.Service.Services
                                        && operation.AccountId == accountId
                                        && operation.Date >= start
                                        && operation.OperationType != OperationType.InterestIncome
-                                    orderby operation.Date
+                                    orderby operation.Date descending
                                     select operation)
                               .Where(where ?? (_ => true))
                               .Include(o => o.Account)

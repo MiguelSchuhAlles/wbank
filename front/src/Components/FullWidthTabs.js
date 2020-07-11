@@ -8,10 +8,11 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import OperationButtons from './OperationButtons.js';
 import OperationHistoryTable from './OperationHistoryTable';
 import AccountCard from './AccountCard';
 import Deposit from '../Pages/Deposit';
+import Withdrawal from '../Pages/Withdrawal';
+import Payment from '../Pages/Payment';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -77,8 +78,11 @@ export default function FullWidthTabs(props) {
           aria-label="full width tabs example"
         >
           <Tab label="Account" {...a11yProps(0)} />
-          <Tab label="Transactions" {...a11yProps(1)} />
-          <Tab label="Transferences" {...a11yProps(2)} />
+          <Tab label="Rentability" {...a11yProps(1)} />
+          <Tab label="Deposit" {...a11yProps(2)} />
+          <Tab label="Withdrawal" {...a11yProps(3)} />
+          <Tab label="Payment" {...a11yProps(4)} />
+          <Tab label="Transference" {...a11yProps(5)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
@@ -91,10 +95,19 @@ export default function FullWidthTabs(props) {
             <OperationHistoryTable token={props.token} accountId={props.accountId}></OperationHistoryTable>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-            <OperationButtons></OperationButtons>
+           Page not implemented.
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-           <Deposit></Deposit>
+            <Deposit token={props.token} accountId={props.accountId}></Deposit>
+        </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+            <Withdrawal token={props.token} accountId={props.accountId}></Withdrawal>
+        </TabPanel>
+        <TabPanel value={value} index={4} dir={theme.direction}>
+            <Payment token={props.token} accountId={props.accountId}></Payment>
+        </TabPanel>
+        <TabPanel value={value} index={5} dir={theme.direction}>
+           Not implemented.
         </TabPanel>
       </SwipeableViews>
     </div>
