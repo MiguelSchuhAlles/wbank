@@ -59,7 +59,7 @@ namespace Banking.Application.Controllers
         [Route("withdraw")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> WithdrawAsync([FromBody]OperationRequestDTO request)
+        public async Task<IActionResult> Withdraw([FromBody]OperationRequestDTO request)
         {
             var userId = Convert.ToInt32(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
 

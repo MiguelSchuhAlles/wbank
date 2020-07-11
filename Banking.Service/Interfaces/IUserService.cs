@@ -10,8 +10,8 @@ namespace Banking.Service.Interfaces
 {
     public interface IUserService
     {
-        ValueTask<IList<User>> FindAll(CancellationToken ct = default);
+        ValueTask<IList<User>> GetAll(CancellationToken ct = default);
 
-        ValueTask<User> FindById(int id, CancellationToken ct = default);
+        ValueTask<User> GetById(int id, CancellationToken ct = default);
     }
 }

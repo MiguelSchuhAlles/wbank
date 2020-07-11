@@ -28,7 +28,7 @@ namespace Banking.Application.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async ValueTask<IActionResult> GetAll(CancellationToken ct = default)
         {
-            var users = await _userService.FindAll(ct);
+            var users = await _userService.GetAll(ct);
             return Ok(users);
         }
 
@@ -36,7 +36,7 @@ namespace Banking.Application.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async ValueTask<IActionResult> GetById(int id, CancellationToken ct = default)
         {
-            var user = await _userService.FindById(id, ct);
+            var user = await _userService.GetById(id, ct);
             return Ok(user);
         }
 
@@ -62,7 +62,7 @@ namespace Banking.Application.Controllers
         {
             var userId = Convert.ToInt32(HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier).Value);
 
-            var user = await _userService.FindById(userId, ct);
+            var user = await _userService.GetById(userId, ct);
             return Ok(user);
         }
     }

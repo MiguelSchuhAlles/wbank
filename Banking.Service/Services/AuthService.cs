@@ -26,7 +26,7 @@ namespace Banking.Service.Services
 
         public async Task<AuthenticationResponse> Authenticate(string email, string password)
         {
-            var user = await this.Context.Users.Include(u => u.Account).FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            var user = await Context.Users.Include(u => u.Account).FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
             if (user == null) return null;
 

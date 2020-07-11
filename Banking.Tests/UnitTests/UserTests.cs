@@ -34,7 +34,7 @@ namespace Banking.Tests.UnitTests
             var id = _user.Id;
 
             // Act
-            var user = await _userService.FindById(id);
+            var user = await _userService.GetById(id);
 
             // Assert
             Assert.IsNotNull(user);
@@ -47,7 +47,7 @@ namespace Banking.Tests.UnitTests
             // Arrange
 
             // Act
-            var users = await _userService.FindAll();
+            var users = await _userService.GetAll();
 
             // Assert
             Assert.IsNotEmpty(users);

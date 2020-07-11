@@ -29,7 +29,7 @@ namespace Banking.Service.Services
                     return response;
                 }
 
-                var account = await this.Context.Accounts.FirstOrDefaultAsync(a => a.Id == request.AccountId && a.UserId == userId);
+                var account = await Context.Accounts.FirstOrDefaultAsync(a => a.Id == request.AccountId && a.UserId == userId);
 
                 if (account == null)
                 {
@@ -73,7 +73,7 @@ namespace Banking.Service.Services
                     return response;
                 }
 
-                var account = await this.Context.Accounts.FirstOrDefaultAsync(a => a.Id == request.AccountId && a.UserId == userId);
+                var account = await Context.Accounts.FirstOrDefaultAsync(a => a.Id == request.AccountId && a.UserId == userId);
 
                 if (account == null)
                 {
@@ -94,7 +94,7 @@ namespace Banking.Service.Services
                     try
                     {
                         var operation = await RegisterOperation(account, request.Amount, OperationType.Payment);
-                        await this.CreateTicketPayment(operation.Id, request.Code);
+                        await CreateTicketPayment(operation.Id, request.Code);
                         response.Item = operation;
                         transaction.Commit();
                     }
@@ -131,7 +131,7 @@ namespace Banking.Service.Services
                     return response;
                 }
 
-                var account = await this.Context.Accounts.FirstOrDefaultAsync(a => a.Id == request.AccountId && a.UserId == userId);
+                var account = await Context.Accounts.FirstOrDefaultAsync(a => a.Id == request.AccountId && a.UserId == userId);
 
                 if (account == null)
                 {

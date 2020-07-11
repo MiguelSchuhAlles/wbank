@@ -13,9 +13,9 @@ namespace Banking.Service.Interfaces
 {
     public interface IAccountService
     {
-        ValueTask<Account> GetAccount(int accountId, int userId);
-        ValueTask<decimal> GetBalance(int accountId, int userId);
-        ValueTask<IList<Operation>> GetOperationHistory(int userId, int accountId, DateTime start, Expression<Func<Operation, bool>> where = null);
-        ValueTask<IList<TimeSeriesDataPoint<decimal>>> GetInterestByMonth(int userId, int accountId, DateTime start);
+        ValueTask<Account> GetAccount(int accountId, int userId, CancellationToken ct = default);
+        ValueTask<decimal> GetBalance(int accountId, int userId, CancellationToken ct = default);
+        ValueTask<IList<Operation>> GetOperationHistory(int accountId, int userId, DateTime start, Expression<Func<Operation, bool>> where = null, CancellationToken ct = default);
+        ValueTask<IList<TimeSeriesDataPoint<decimal>>> GetInterestByMonth(int accountId, int userId, DateTime start, CancellationToken ct = default);
     }
 }

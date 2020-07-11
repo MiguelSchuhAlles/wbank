@@ -22,7 +22,7 @@ namespace Banking.Tests.UnitTests
             SeedBranches();
             SeedAccounts();
 
-            _user = (await _userService.FindAll()).FirstOrDefault();
+            _user = (await _userService.GetAll()).FirstOrDefault();
             _account = await _accountService.GetAccount(_user.Id, _user.Account.Id);
         }
 
