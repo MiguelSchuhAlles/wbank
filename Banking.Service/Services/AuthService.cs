@@ -26,7 +26,7 @@ namespace Banking.Service.Services
 
         public async Task<AuthenticationResponse> Authenticate(string email, string password)
         {
-            var user = await this.Context.Users.FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
+            var user = await this.Context.Users.Include(u => u.Account).FirstOrDefaultAsync(u => u.Email == email && u.Password == password);
 
             if (user == null) return null;
 
@@ -35,6 +35,7 @@ namespace Banking.Service.Services
             response.UserId = user.Id;
             response.Name = user.Name;
             response.Email = user.Email;
+            response.AccountId = user.Account.Id;
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_settings.Secret);

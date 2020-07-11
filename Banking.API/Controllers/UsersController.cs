@@ -45,7 +45,7 @@ namespace Banking.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async ValueTask<IActionResult> Post([FromBody] UserRequestDTO user)
         {
-            return Ok();
+            throw new NotImplementedException();
         }
 
         [HttpPut("{id}")]
@@ -53,7 +53,7 @@ namespace Banking.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async ValueTask<IActionResult> Put(int id, [FromBody] UserRequestDTO user)
         {
-            return Ok();
+            throw new NotImplementedException();
         }
 
         [HttpGet("me")]

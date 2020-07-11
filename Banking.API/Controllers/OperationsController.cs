@@ -35,8 +35,7 @@ namespace Banking.Application.Controllers
 
             var response = await _operationService.Deposit(request, userId);
 
-            if (response.ResponseStatus != ResponseStatus.Success)
-                return BadRequest(response);
+            if (response.ResponseStatus != ResponseStatus.Success) return BadRequest(response);
 
             return Ok(response);
         }
@@ -51,8 +50,7 @@ namespace Banking.Application.Controllers
 
             var response = await _operationService.TicketPayment(request, userId);
 
-            if (response.ResponseStatus != ResponseStatus.Success)
-                return BadRequest(response);
+            if (response.ResponseStatus != ResponseStatus.Success) return BadRequest(response);
 
             return Ok(response);
         }
@@ -67,8 +65,7 @@ namespace Banking.Application.Controllers
 
             var response = await _operationService.Withdraw(request, userId);
 
-            if (response.ResponseStatus != ResponseStatus.Success)
-                return BadRequest(response);
+            if (response.ResponseStatus != ResponseStatus.Success) return BadRequest(response);
 
             return Ok(response);
         }

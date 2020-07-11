@@ -54,6 +54,8 @@ namespace Banking.BackgroundTasks
             {
                 while (!ct.IsCancellationRequested)
                 {
+                    //TODO: implement remuneration just in business days
+
                     var now = DateTime.Now;
                     var midnight = DateTime.Today.AddDays(1);
 
@@ -83,6 +85,8 @@ namespace Banking.BackgroundTasks
                 {
                     try
                     {
+                        //TODO: Income tax and IOF
+
                         var amount = account.Balance * (AnnualInterestRate / 365);
                         var operation = await operationService.RegisterOperation(account, amount, Domain.Entities.Operations.OperationType.InterestIncome);
 

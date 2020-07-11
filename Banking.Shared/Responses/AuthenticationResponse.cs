@@ -9,6 +9,9 @@ namespace Banking.Shared.Responses
         public int UserId { get; set; }
 
         [DataMember]
+        public int AccountId { get; set; }
+
+        [DataMember]
         public string Name { get; set; }
 
         [DataMember]

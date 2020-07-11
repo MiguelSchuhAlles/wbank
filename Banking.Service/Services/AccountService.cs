@@ -45,9 +45,15 @@ namespace Banking.Service.Services
                                     orderby operation.Date
                                     select operation)
                               .Where(where ?? (_ => true))
+                              .Include(o => o.Account)
                               .ToListAsync();
 
             return operations;
+        }
+
+        public async ValueTask<IList<Operation>> GetInterestByMonth(int userId, int accountId, DateTime start)
+        {
+            throw new NotImplementedException();
         }
     }
 }
