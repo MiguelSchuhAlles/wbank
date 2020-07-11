@@ -41,6 +41,8 @@ namespace Banking.API
 
             services.AddServices();
             services.AddHostedServices();
+
+            services.AddSwagger();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +68,12 @@ namespace Banking.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WBank API V1");
             });
         }
     }

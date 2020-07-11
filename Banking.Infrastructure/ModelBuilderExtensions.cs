@@ -8,6 +8,8 @@ namespace Banking.Infrastructure
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            //TODO: treatment for key colision between seeds and new data
+
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Name = "Admin", Phone = "+55 51 987654321", Password = "admin", Email = "admin@gmail.com", Enabled = true },
                 new User { Id = 2, Name = "Miguel", Phone = "+55 51 987654321", Password = "miguel", Email = "miguel@gmail.com", Enabled = true },
