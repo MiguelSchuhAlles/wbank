@@ -28,9 +28,9 @@ The backend architecture is based on the Domain Driven Design concept and implem
 
 ### Startup
 -Acess the Banking.API/ folder\
--Run application with "dotnet run" or in debug mode through VS\
- -API will be acessible at https://localhost:44337/api/ \
- -Swagger can be acessed at http://localhost:5000/swagger \
+-Run application with dotnet run\
+&nbsp;&nbsp;&nbsp;-API will be acessible at http://localhost:5000/api/... \
+&nbsp;&nbsp;&nbsp;-Swagger can be acessed at http://localhost:5000/swagger \
 -Acess the Banking.API/ folder\
 -Run frontend application with yarn start\
  -frontend will be acessible at http://localhost:3000/
