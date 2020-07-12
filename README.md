@@ -3,7 +3,8 @@ Fullstack banking web app implemented with .NET Core and React.
 Currently the app simulates  the deposit, withdraw and payment functionalities of a bank account and rentabilizes the balance on a daily basis. 
 ## Frontend
 Developed using React with Material-UI and Recharts components.\
-Includes an account details page, rentability history and operation commands.
+Includes an account details page, rentability history and operation commands.\
+The default (hardcoded login) user's credentials are email = "diogo@gmail.com" and password = "diogo" (necessary for deposits, withdrawals and payments).
 #### Account details:
 ![Image of account](https://user-images.githubusercontent.com/51866503/87248647-05ebc300-c431-11ea-910e-0c8ffccfa427.PNG)
 #### Rentability history:
