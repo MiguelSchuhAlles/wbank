@@ -30,7 +30,7 @@ The backend architecture is based on the Domain Driven Design concept and implem
 -Acess the Banking.API/ folder\
 -Run application with dotnet run\
 &nbsp;&nbsp;&nbsp;-API will be acessible at http://localhost:5000/api/... \
-&nbsp;&nbsp;&nbsp;-Swagger can be acessed at http://localhost:5000/swagger \
+&nbsp;&nbsp;&nbsp;-Swagger can be acessed at http://localhost:5000/swagger (email "admin@gmail.com" and password "admin" can be used for authentication)\
 -Acess the Banking.API/ folder\
 -Run frontend application with yarn start\
  -frontend will be acessible at http://localhost:3000/
