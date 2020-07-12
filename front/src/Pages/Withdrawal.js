@@ -37,7 +37,7 @@ class Withdrawal extends Component {
         amount: this.state.amount
       }
 
-      fetch('https://localhost:44337/api/operations/withdraw',{
+      fetch('http://localhost:5000/api/operations/withdraw',{
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',

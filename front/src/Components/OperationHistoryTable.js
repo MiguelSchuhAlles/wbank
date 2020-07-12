@@ -46,7 +46,7 @@ class OperationHistoryTable extends Component {
 
   componentDidMount() {
     if(this.props.token !== ""){
-      fetch(`https://localhost:44337/api/accounts/${this.props.accountId}/history`,{
+      fetch(`http://localhost:5000/api/accounts/${this.props.accountId}/history`,{
         headers: {
            authorization: "Bearer " + this.props.token
          }

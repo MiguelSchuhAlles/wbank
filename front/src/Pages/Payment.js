@@ -44,7 +44,7 @@ class Payment extends Component {
         code: this.state.code
       };
 
-      fetch('https://localhost:44337/api/operations/ticketpayment',{
+      fetch('http://localhost:5000/api/operations/ticketpayment',{
         method: "POST",
         headers: { 
           'Content-Type': 'application/json',

@@ -37,7 +37,7 @@ class AccountCard extends Component {
 
   componentDidMount() {
     if(this.props.token !== ""){
-      fetch(`https://localhost:44337/api/users/${this.props.accountId}`,{
+      fetch(`http://localhost:5000/api/users/${this.props.accountId}`,{
         headers: {
            authorization: "Bearer " + this.props.token
          }

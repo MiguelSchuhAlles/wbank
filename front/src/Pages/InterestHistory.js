@@ -10,7 +10,7 @@ export default class InterestHistory extends PureComponent {
 
     componentDidMount() {
         if(this.props.token !== ""){
-          fetch(`https://localhost:44337/api/accounts/${this.props.accountId}/interesthistory`,{
+          fetch(`http://localhost:5000/api/accounts/${this.props.accountId}/interesthistory`,{
             headers: {
                authorization: "Bearer " + this.props.token
              }
