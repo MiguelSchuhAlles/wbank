@@ -6,8 +6,6 @@ using Banking.Shared.Requests;
 using Banking.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Banking.Service.Services
@@ -18,17 +16,11 @@ namespace Banking.Service.Services
 
         public async Task<Response<Operation>> Deposit(OperationRequestDTO request, int userId)
         {
-            var response = new Response<Operation>();
+            var response = await this.ValidateOperation(request, userId);
+            if (response.ResponseStatus == ResponseStatus.Error) return response;
 
             try
             {
-                if (request.Amount <= 0)
-                {
-                    response.ResponseStatus = ResponseStatus.Error;
-                    response.Message = "Invalid ammount.";
-                    return response;
-                }
-
                 var account = await Context.Accounts.FirstOrDefaultAsync(a => a.Id == request.AccountId && a.UserId == userId);
 
                 if (account == null)
@@ -55,17 +47,11 @@ namespace Banking.Service.Services
 
         public async Task<Response<Operation>> TicketPayment(PaymentRequestDTO request, int userId)
         {
-            var response = new Response<Operation>();
+            var response = await this.ValidateOperation(request, userId);
+            if (response.ResponseStatus == ResponseStatus.Error) return response;
 
             try
             {
-                if (request.Amount <= 0)
-                {
-                    response.ResponseStatus = ResponseStatus.Error;
-                    response.Message = "Invalid ammount.";
-                    return response;
-                }
-
                 if (request.Code == null || request.Code == "")
                 {
                     response.ResponseStatus = ResponseStatus.Error;
@@ -93,8 +79,8 @@ namespace Banking.Service.Services
                 {
                     try
                     {
-                        var operation = await RegisterOperation(account, request.Amount, OperationType.Payment);
-                        await CreateTicketPayment(operation.Id, request.Code);
+                        var operation = await this.RegisterOperation(account, request.Amount, OperationType.Payment);
+                        await this.CreateTicketPayment(operation.Id, request.Code);
                         response.Item = operation;
                         transaction.Commit();
                     }
@@ -120,17 +106,11 @@ namespace Banking.Service.Services
 
         public async Task<Response<Operation>> Withdraw(OperationRequestDTO request, int userId)
         {
-            var response = new Response<Operation>();
+            var response = await this.ValidateOperation(request, userId);
+            if (response.ResponseStatus == ResponseStatus.Error) return response;
 
             try
             {
-                if (request.Amount <= 0)
-                {
-                    response.ResponseStatus = ResponseStatus.Error;
-                    response.Message = "Invalid ammount.";
-                    return response;
-                }
-
                 var account = await Context.Accounts.FirstOrDefaultAsync(a => a.Id == request.AccountId && a.UserId == userId);
 
                 if (account == null)
@@ -166,6 +146,10 @@ namespace Banking.Service.Services
         {
             switch (operationType)
             {
+                case OperationType.Deposit:
+                case OperationType.InterestIncome:
+                    account.Balance += amount;
+                    break;
                 case OperationType.PointOfSale:
                 case OperationType.Transfer:
                 case OperationType.Withdrawal:
@@ -173,13 +157,9 @@ namespace Banking.Service.Services
                 case OperationType.Payment:
                     account.Balance -= amount;
                     break;
-                case OperationType.Deposit:
-                case OperationType.InterestIncome:
-                    account.Balance += amount;
-                    break;
-                default:
-                    break;
             }
+
+            Context.Accounts.Update(account);
 
             var newOperation = new Operation
             {
@@ -192,11 +172,32 @@ namespace Banking.Service.Services
 
             Context.Operations.Add(newOperation);
 
-            Context.Accounts.Update(account);
-
             await Context.SaveChangesAsync();
 
             return newOperation;
+        }
+         
+        private async Task<Response<Operation>> ValidateOperation(OperationRequestDTO request, int userId)
+        {
+            var response = new Response<Operation>() { ResponseStatus = ResponseStatus.Success };
+
+            var user = await Context.Users.FirstOrDefaultAsync(u => u.Id == userId && u.Password == request.Password);
+
+            if (user == null)
+            {
+                response.ResponseStatus = ResponseStatus.Error;
+                response.Message = "Wrong password.";
+                return response;
+            }
+
+            if (request.Amount <= 0)
+            {
+                response.ResponseStatus = ResponseStatus.Error;
+                response.Message = "Invalid ammount.";
+                return response;
+            }
+
+            return response;
         }
 
         private async Task<TicketPayment> CreateTicketPayment(int operationId, string code)

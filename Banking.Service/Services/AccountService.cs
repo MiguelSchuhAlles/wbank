@@ -55,7 +55,7 @@ namespace Banking.Service.Services
 
         public async ValueTask<IList<TimeSeriesDataPoint<decimal>>> GetInterestByMonth(int accountId, int userId, DateTime start, CancellationToken ct = default)
         {
-            var ops = (await Context.Operations
+            var points = (await Context.Operations
                 .Where(o => o.OperationType == OperationType.InterestIncome && o.AccountId == accountId && o.Date >= start)
                 .GroupBy(o => new { Date = new DateTime(o.Date.Year, o.Date.Month, 1) })
                 .Select(g => new TimeSeriesDataPoint<decimal>
@@ -64,7 +64,7 @@ namespace Banking.Service.Services
                     Value = g.Sum(o => o.Amount)
                 }).ToListAsync(ct)).OrderBy(o => o.Timestamp);
 
-            return ops.ToList();
+            return points.ToList();
 
         }
     }

@@ -17,16 +17,18 @@ class Payment extends Component {
     super(props);
     this.state = {
       amount: "",
-      code: ""
+      code: "",
+      password: ""
     };
 
     this.handleAmountChange = this.handleAmountChange.bind(this);
     this.handleCodeChange = this.handleCodeChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleAmountChange(event) { this.setState({amount: event.target.value}); }
-
+  handlePasswordChange(event) { this.setState({password: event.target.value}); }
   handleCodeChange(event) { this.setState({code: event.target.value}); }
 
   handleSubmit(event) 
@@ -35,13 +37,16 @@ class Payment extends Component {
       alert("Invalid value! Enter a valid number.");
     }else if(this.state.amount < 0){
       alert("Invalid amount! Must be greater than zero.");
+    }else if(this.state.password === ""){
+      alert("Inform the password!");
     }else if(this.state.code === ""){
         alert("Invalid data! Code can't be empty.");
     }else{
       let operationRequest = {
         accountId: this.props.accountId,
         amount: this.state.amount,
-        code: this.state.code
+        code: this.state.code,
+        password: this.state.password
       };
 
       fetch('http://localhost:5000/api/operations/ticketpayment',{
@@ -74,6 +79,7 @@ class Payment extends Component {
       <form noValidate ref="form" onSubmit={this.handleSubmit}>
         <div>
           <Input placeholder="Amount" value={this.state.amount} onChange={this.handleAmountChange} inputProps={{ 'aria-label': 'description' }}/>
+          <Input placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange} inputProps={{ 'aria-label': 'description' }}/>
           <Input placeholder="Code" value={this.state.code} onChange={this.handleCodeChange} inputProps={{ 'aria-label': 'description' }}/>
           <Input placeholder="Description" inputProps={{ 'aria-label': 'description' }} />
         </div>

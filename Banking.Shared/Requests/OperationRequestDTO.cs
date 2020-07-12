@@ -9,9 +9,9 @@ namespace Banking.Shared.Requests
         public int AccountId { get; set; }
 
         [DataMember]
-        public decimal Amount { get; set; }
+        public string Password { get; set; }
 
-        //[DataMember]
-        //public string TransactionToken { get; set; }
+        [DataMember]
+        public decimal Amount { get; set; }
     }
 }

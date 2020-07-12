@@ -16,14 +16,17 @@ class Deposit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: ""
+      amount: "",
+      password: ""
     };
 
     this.handleAmountChange = this.handleAmountChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleAmountChange(event) { this.setState({amount: event.target.value}); }
+  handlePasswordChange(event) { this.setState({password: event.target.value}); }
 
   handleSubmit(event) 
   {
@@ -31,10 +34,13 @@ class Deposit extends Component {
       alert("Invalid value! Enter a valid number.");
     }else if(this.state.amount < 0){
       alert("Invalid amount! Must be greater than zero.");
+    }else if(this.state.password === ""){
+      alert("Inform the password!");
     }else{
       let operationRequest = {
         accountId: this.props.accountId,
-        amount: this.state.amount
+        amount: this.state.amount,
+        password: this.state.password
       }
 
       fetch('http://localhost:5000/api/operations/deposit',{
@@ -67,6 +73,7 @@ class Deposit extends Component {
       <form noValidate ref="form" onSubmit={this.handleSubmit}>
         <div>
           <Input placeholder="Amount" value={this.state.amount} onChange={this.handleAmountChange} inputProps={{ 'aria-label': 'description' }}/>
+          <Input placeholder="Password" value={this.state.password} onChange={this.handlePasswordChange} inputProps={{ 'aria-label': 'description' }}/>
           <Input placeholder="Description" inputProps={{ 'aria-label': 'description' }} />
         </div>
         <div className={classes.root}>
