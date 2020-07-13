@@ -40,7 +40,7 @@ The backend architecture is based on the Domain Driven Design concept and implem
 ## Coming soon
 -Account and user creation\
 -Definitive UI layout and design and general improvements\
--Transference feature\
+-Transference UI (backend already functional)\
 -Tax (IOF and IR) rules on remuneration service\
 -Login page\
 -Password cryptography\
