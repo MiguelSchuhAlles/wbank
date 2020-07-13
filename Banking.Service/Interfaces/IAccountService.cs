@@ -1,11 +1,9 @@
 ﻿using Banking.Domain.Entities;
 using Banking.Domain.Entities.Operations;
-using Banking.Shared.Requests;
 using Banking.Shared.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 

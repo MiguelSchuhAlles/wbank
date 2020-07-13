@@ -12,6 +12,8 @@ namespace Banking.Domain.Entities.Operations
         Deposit = 3,
         Charge = 4, //credit card
         Payment = 5,
-        InterestIncome = 6
+        InterestIncome = 6,
+        ReceivedTransference = 7,
+        TransferenceReversal = 8,
     }
 }

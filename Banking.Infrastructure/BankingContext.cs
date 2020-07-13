@@ -18,6 +18,9 @@ namespace Banking.Infrastructure
             modelBuilder.Entity<Operation>()
                 .HasIndex(o => new { o.Date, o.AccountId });
 
+            modelBuilder.Entity<Transference>()
+                .HasIndex(o => new { o.Status, o.AccountId });
+
             modelBuilder.Seed();
         }
 
@@ -26,5 +29,6 @@ namespace Banking.Infrastructure
         public DbSet<User> Users { get; set; }
         public DbSet<Operation> Operations { get; set; }
         public DbSet<TicketPayment> TicketPayments { get; set; }
+        public DbSet<Transference> Transferences { get; set; }
     }
 }

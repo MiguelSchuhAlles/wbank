@@ -148,6 +148,8 @@ namespace Banking.Service.Services
             {
                 case OperationType.Deposit:
                 case OperationType.InterestIncome:
+                case OperationType.ReceivedTransference:
+                case OperationType.TransferenceReversal:
                     account.Balance += amount;
                     break;
                 case OperationType.PointOfSale:

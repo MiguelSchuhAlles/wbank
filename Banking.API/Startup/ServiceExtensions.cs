@@ -12,7 +12,7 @@ namespace Banking.API
         {
             return services
                 .AddTransient<IUserService, UserService>()
-                .AddTransient<ITransferService, TransferService>()
+                .AddTransient<ITransferenceService, TransferenceService>()
                 .AddTransient<IOperationService, OperationService>()
                 .AddTransient<IAccountService, AccountService>()
                 .AddTransient<IAuthService, AuthService>();
@@ -21,7 +21,8 @@ namespace Banking.API
         public static IServiceCollection AddHostedServices(this IServiceCollection services)
         {
             return services
-                .AddHostedService<RemunerationService>();
+                .AddHostedService<RemunerationService>()
+                .AddHostedService<TransferenceProcessmentService>();
         }
 
         public static IServiceCollection AddSwagger(this IServiceCollection services)
