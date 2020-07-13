@@ -27,12 +27,14 @@ const useStyles = theme => ({
 
 const operationTypes = {
   0: 'Point of Sale',
-  1: 'Transfer',
+  1: 'Transference',
   2: 'Withdrawal',
   3: 'Deposit',
   4: 'Charge',
   5: 'Payment',
-  6: 'Interest Income'
+  6: 'Interest Income',
+  7: 'Received Transference',
+  8: 'Transference Reversal'
 }
 
 class OperationHistoryTable extends Component {

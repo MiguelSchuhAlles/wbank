@@ -58,7 +58,7 @@ namespace Banking.BackgroundTasks
                 {
                     //TODO: process transferences just in business days and horaries
 
-                    Thread.Sleep(TimeSpan.FromMinutes(5));
+                    Thread.Sleep(TimeSpan.FromMinutes(2));
 
                     _logger.LogInformation($"Processing transferences.");
 
@@ -95,6 +95,7 @@ namespace Banking.BackgroundTasks
                             else
                             {
                                 transference.Status = TransferenceStatus.Rejected;
+                                await ReverseTransference(transference);
                                 _logger.LogInformation($"Transference Id = {transference.Id} failed and has been rejected.");
                             }  
                         }
@@ -122,6 +123,7 @@ namespace Banking.BackgroundTasks
                         }
 
                         context.Transferences.Update(transference);
+                        await context.SaveChangesAsync();
                     }
                     catch (Exception ex)
                     {
@@ -143,8 +145,8 @@ namespace Banking.BackgroundTasks
                     var account = await context.Accounts.FirstOrDefaultAsync(a => a.Code == transference.RecipientAccountCode && a.Branch.Number == transference.RecipientBranchNumber);
                     if (account == null) return false;
 
-                    var operaton = await operationService.RegisterOperation(account, transference.Amount, OperationType.ReceivedTransference);
-                    if (operaton == null) return false;
+                    var operation = await operationService.RegisterOperation(account, transference.Amount, OperationType.ReceivedTransference);
+                    if (operation == null) return false;
 
                     return true;
                 }
