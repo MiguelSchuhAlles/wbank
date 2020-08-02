@@ -10,18 +10,37 @@ using Banking.Service.Interfaces;
 using System.Linq.Expressions;
 using Banking.Shared.Responses;
 using System.Threading;
+using Microsoft.Extensions.Caching.Distributed;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Banking.Service.Services
 {
     public class AccountService : BaseService, IAccountService
     {
-        public AccountService(BankingContext context) : base(context) { }
+        public AccountService(BankingContext context, IDistributedCache distributedCache) : base(context, distributedCache) { }
 
         public async ValueTask<Account> GetAccount(int accountId, int userId, CancellationToken ct = default)
-            => await Context.Accounts
-                .Include(account => account.User)
-                .Include(account => account.Branch)
-                .FirstOrDefaultAsync(account => account.UserId == userId && account.Id == accountId, ct);
+        {
+            var cacheAccount = _distributedCache.GetString($"account:{accountId}");
+            Account account;
+
+            if (cacheAccount != null)
+            {
+                account = JsonSerializer.Deserialize<Account>(cacheAccount, _serializationOptions);
+            }
+            else
+            {
+                account = await Context.Accounts
+                            .Include(a => a.User)
+                            .Include(a => a.Branch)
+                            .FirstOrDefaultAsync(a => a.UserId == userId && a.Id == accountId, ct);
+
+                _distributedCache.SetString($"account:{account.Id}", JsonSerializer.Serialize(account, _serializationOptions));
+            }
+
+            return account;
+        }
 
         //TODO: create account
 

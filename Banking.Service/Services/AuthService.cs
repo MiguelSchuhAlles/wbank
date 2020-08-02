@@ -12,6 +12,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Banking.Shared.Responses;
 using Banking.Shared;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace Banking.Service.Services
 {
@@ -19,7 +20,7 @@ namespace Banking.Service.Services
     {
         private readonly Settings _settings;
 
-        public AuthService(Settings settings, BankingContext context) : base(context)
+        public AuthService(Settings settings, BankingContext context, IDistributedCache distributedCache) : base(context, distributedCache)
         {
             _settings = settings;
         }

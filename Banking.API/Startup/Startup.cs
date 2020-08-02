@@ -26,6 +26,13 @@ namespace Banking.API
             services.AddControllers().AddNewtonsoftJson(options =>
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
+            services.AddDistributedRedisCache(options =>
+            {
+                options.Configuration =
+                    Configuration.GetConnectionString("RedisConnection");
+                options.InstanceName = "APIBanking";
+            });
+
             var connection = Configuration["MySqlConnection:MySqlConnectionString"];
             services.AddDbContext<BankingContext>(options =>
                 options.UseMySql(connection)

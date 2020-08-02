@@ -5,6 +5,7 @@ using Banking.Service.Interfaces;
 using Banking.Shared.Requests;
 using Banking.Shared.Responses;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using System;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace Banking.Service.Services
 {
     public class TransferenceService : BaseService, ITransferenceService
     {
-        public TransferenceService(BankingContext context) : base(context) { }
+        public TransferenceService(BankingContext context, IDistributedCache distributedCache) : base(context, distributedCache) { }
 
         public async Task<Response<Transference>> Transference(TransferenceRequestDTO request, int userId)
         {
